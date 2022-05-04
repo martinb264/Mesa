@@ -12,8 +12,11 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField]
     private GameObject optionsScreen;
     // Start is called before the first frame update
-  
 
+    private void Start()
+    {
+        
+    }
     public void StartGame()
     {
         SceneManager.LoadScene(firstLevel);
@@ -21,9 +24,11 @@ public class MainMenuScript : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(firstLevel);
-        LevelManagerScript.instance.loadLevel(SaveSystem.loadPlayer());
+        LoadingData.sceneToLoad = firstLevel;
+        SceneManager.LoadScene("Loading");
+        //LevelManagerScript.instance.loadLevel(SaveSystem.loadPlayer());
     }
+
 
     public void OpenOptions()
     {
@@ -39,4 +44,6 @@ public class MainMenuScript : MonoBehaviour
     {
         Application.Quit();
     }
+
+ 
 }

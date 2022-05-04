@@ -16,7 +16,8 @@ public class LevelManagerScript : MonoBehaviour
     private Camera mainCam;
     [SerializeField]
     private Camera bossCam;
-
+    [SerializeField]
+    private GameObject currentPlayer;
     public Camera activeCam;
     [SerializeField]
     private BossDoorScript bossDoorScript;
@@ -31,21 +32,29 @@ public class LevelManagerScript : MonoBehaviour
         mainCam.enabled = true;
         activeCam = mainCam;
         bossCam.enabled = false;
+        
     }
+  
     public void loadLevel(PlayerData data)
     {
+ 
         if (data != null)
         {
             Vector3 playerPosition = new Vector3();
             playerPosition.x = data.playerPosition[0];
             playerPosition.y = data.playerPosition[1];
-            //player.position = playerPosition;
-
+    
+            currentPlayer.transform.position = playerPosition;
+    
             Vector3 respawnPosition = new Vector3();
             respawnPosition.x = data.respawnPosition[0];
             respawnPosition.y = data.respawnPosition[1];
             respawnPoint.position = respawnPosition;
 
+        }
+        if (data == null)
+        {
+            Debug.Log("No Save Data");
         }
     }
     public Transform getRespawnPosition()
@@ -58,6 +67,7 @@ public class LevelManagerScript : MonoBehaviour
         if (isAlive == false)
         {
             GameObject Player = Instantiate(playerPrefab, respawnPoint.position, Quaternion.identity);
+            currentPlayer = Player;
             player = Player.transform;
             CameraController.instance.player = Player;
             activeCam = mainCam;

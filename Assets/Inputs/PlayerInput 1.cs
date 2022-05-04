@@ -80,6 +80,15 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""160f26b7-905e-44c2-8e4e-89843dc57d67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,6 +342,17 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c10f88e1-4173-4a85-b701-90e10758cce1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -926,6 +946,7 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Respawn = m_Player.FindAction("Respawn", throwIfNotFound: true);
+        m_Player_PauseMenu = m_Player.FindAction("PauseMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1003,6 +1024,7 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Respawn;
+    private readonly InputAction m_Player_PauseMenu;
     public struct PlayerActions
     {
         private @PlayerInput1 m_Wrapper;
@@ -1013,6 +1035,7 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Respawn => m_Wrapper.m_Player_Respawn;
+        public InputAction @PauseMenu => m_Wrapper.m_Player_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1040,6 +1063,9 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
                 @Respawn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRespawn;
                 @Respawn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRespawn;
                 @Respawn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRespawn;
+                @PauseMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1062,6 +1088,9 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
                 @Respawn.started += instance.OnRespawn;
                 @Respawn.performed += instance.OnRespawn;
                 @Respawn.canceled += instance.OnRespawn;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
             }
         }
     }
@@ -1224,6 +1253,7 @@ public partial class @PlayerInput1 : IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnRespawn(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

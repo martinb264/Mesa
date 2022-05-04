@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerInput 1",
     "maps": [
         {
             "name": "Player",
@@ -54,6 +54,15 @@
                     "name": "Respawn",
                     "type": "Button",
                     "id": "2e113149-bea9-435c-adde-b1651da7a15e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PauseMenu",
+                    "type": "Button",
+                    "id": "160f26b7-905e-44c2-8e4e-89843dc57d67",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -311,6 +320,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Respawn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c10f88e1-4173-4a85-b701-90e10758cce1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

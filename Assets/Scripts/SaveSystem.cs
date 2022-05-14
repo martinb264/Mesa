@@ -10,8 +10,8 @@ public static class SaveSystem
    public static void savePlayer(Transform player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        //string path = Application.persistentDataPath + "/playerData.data";
-        string path = "C:\\Users\\marti\\Desktop\\Game Assets\\playerData.data";
+        string path = Application.persistentDataPath + "/playerData.data";
+   
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(player);
@@ -22,8 +22,8 @@ public static class SaveSystem
 
     public static PlayerData loadPlayer()
     {
-        string path = "C:\\Users\\marti\\Desktop\\Game Assets\\playerData.data";
-        //string path = Application.persistentDataPath + "/playerData.data";
+
+        string path = Application.persistentDataPath + "/playerData.data";
         if(File.Exists(path))
         {
             BinaryFormatter formatter=new BinaryFormatter();

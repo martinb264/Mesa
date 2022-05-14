@@ -19,7 +19,8 @@ public class MainMenuScript : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene(firstLevel);
+        LoadingData.sceneToLoad = firstLevel;
+        SceneManager.LoadScene("Loading");
     }
 
     public void LoadGame()
